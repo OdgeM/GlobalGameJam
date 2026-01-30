@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteLibrarySourceAsset
   m_Library:
-  - m_Name: ChestInsignia
-    m_Hash: 773987252
+  - m_Name: Insignia
+    m_Hash: 1004532724
     m_CategoryList: []
     m_OverrideEntries:
     - m_Name: ChestInsignia_0
@@ -92,5 +92,5 @@ MonoBehaviour:
     m_FromMain: 0
     m_EntryOverrideCount: 4
   m_PrimaryLibraryGUID: 
-  m_ModificationHash: 639053979126946039
+  m_ModificationHash: 639053996313823595
   m_Version: 1

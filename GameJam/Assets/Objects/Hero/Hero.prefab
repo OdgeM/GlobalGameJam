@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6307931870869887624}
   - component: {fileID: 597166142899893110}
   m_Layer: 0
-  m_Name: HeadwareSprite
+  m_Name: HeadwearSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,8 +60,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteResolver
-  m_CategoryHash: 0.024146153
-  m_labelHash: 5.692118e-28
+  m_CategoryHash: 5.4450234e-27
+  m_labelHash: 2.5714495e-27
   m_SpriteKey: 0
   m_SpriteHash: 286465759
 --- !u!212 &597166142899893110
@@ -112,7 +112,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: -1260712420, guid: 440b6da367d3baf4190061f4883e1757, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -146,14 +146,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824294438341489411}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.02, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6340362871981012174}
   - {fileID: 6361434846653202174}
-  m_Father: {fileID: 8051879838441532589}
+  m_Father: {fileID: 3908093492836447805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1098132570163159728
 GameObject:
@@ -233,7 +233,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: f7da64a849e0f1d4f84fb3ad3bd6f3ac, type: 3}
   m_Color: {r: 1, g: 0.20392156, b: 0.24660984, a: 1}
   m_FlipX: 0
@@ -269,7 +269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1467806082405635268}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -278,7 +278,7 @@ Transform:
   - {fileID: 4571945751305017654}
   - {fileID: 4584882495643196785}
   - {fileID: 4551020721645682433}
-  m_Father: {fileID: 8051879838441532589}
+  m_Father: {fileID: 3908093492836447805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1513734003740081636
 GameObject:
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 6361434846653202174}
   - component: {fileID: 8321639788687560858}
   m_Layer: 0
-  m_Name: HandSprite
+  m_Name: HandSpriteL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 1052934177484808502}
   - component: {fileID: 8753562375553740715}
   m_Layer: 0
-  m_Name: ArmSprite
+  m_Name: ArmSpriteR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -559,6 +559,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8051879838441532589}
+  - component: {fileID: 4531780047078012631}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -579,15 +580,75 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3607124277779631628}
-  - {fileID: 1367591841431411278}
-  - {fileID: 468144169904849152}
-  - {fileID: 5352175674834291920}
-  - {fileID: 678937045474671252}
-  - {fileID: 1988522648300729310}
-  - {fileID: 6896577370844869941}
+  - {fileID: 3908093492836447805}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4531780047078012631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2706323357760436296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a090839321a29d4e98035924707a37a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hero
+  characterSeed: 65465165
+  alienChance: 0.1
+  sprite: {fileID: 8187216331177509025}
+  pantsChance: 0.5
+  capeChance: 0.5
+  insigniaChance: 0.5
+  headwearChance: 0.5
+  armAccentChance: 0.25
+  baldChance: 0.1
+  humanSkinColours:
+  - {r: 1, g: 0.8745098, b: 0.76862746, a: 1}
+  - {r: 0.91764706, g: 0.79607844, b: 0.65882355, a: 1}
+  - {r: 0.96862745, g: 0.8862745, b: 0.67058825, a: 1}
+  - {r: 0.8627451, g: 0.7254902, b: 0.5686275, a: 1}
+  - {r: 0.9411765, g: 0.7529412, b: 0.5411765, a: 1}
+  - {r: 0.90588236, g: 0.7372549, b: 0.5686275, a: 1}
+  - {r: 0.9254902, g: 0.7490196, b: 0.5137255, a: 1}
+  - {r: 0.8117647, g: 0.61960787, b: 0.4862745, a: 1}
+  - {r: 0.6745098, g: 0.54509807, b: 0.39215687, a: 1}
+  - {r: 0.5803922, g: 0.38039216, b: 0.23529412, a: 1}
+  - {r: 0.69803923, g: 0.41568628, b: 0.28627452, a: 1}
+  - {r: 0.68235296, g: 0.4392157, b: 0.22745098, a: 1}
+  - {r: 0.6, g: 0.39215687, b: 0.3019608, a: 1}
+  - {r: 0.38431373, g: 0.22745098, b: 0.09411765, a: 1}
+  - {r: 0.24705882, g: 0.15686275, b: 0.09411765, a: 1}
+  hairColours:
+  - {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
+  - {r: 0.17254902, g: 0.13333334, b: 0.16862746, a: 1}
+  - {r: 0.23137255, g: 0.1882353, b: 0.14117648, a: 1}
+  - {r: 0.30588236, g: 0.2627451, b: 0.24705882, a: 1}
+  - {r: 0.3137255, g: 0.26666668, b: 0.26666668, a: 1}
+  - {r: 0.41568628, g: 0.30588236, b: 0.25882354, a: 1}
+  - {r: 0.3372549, g: 0.28235295, b: 0.23137255, a: 1}
+  - {r: 0.654902, g: 0.52156866, b: 0.41568628, a: 1}
+  - {r: 0.72156864, g: 0.5921569, b: 0.47058824, a: 1}
+  - {r: 0.8627451, g: 0.8156863, b: 0.7294118, a: 1}
+  - {r: 0.89411765, g: 0.7372549, b: 0.6, a: 1}
+  - {r: 0.5921569, g: 0.4745098, b: 0.38039216, a: 1}
+  - {r: 0.9019608, g: 0.80784315, b: 0.65882355, a: 1}
+  - {r: 0.8980392, g: 0.78431374, b: 0.65882355, a: 1}
+  - {r: 0.64705884, g: 0.41960785, b: 0.27450982, a: 1}
+  - {r: 0.5686275, g: 0.33333334, b: 0.23921569, a: 1}
+  - {r: 0.3254902, g: 0.23921569, b: 0.20784314, a: 1}
+  - {r: 0.44313726, g: 0.3882353, b: 0.3647059, a: 1}
+  - {r: 0.8392157, g: 0.76862746, b: 0.7607843, a: 1}
+  - {r: 1, g: 0.9607843, b: 0.88235295, a: 1}
+  - {r: 0.7921569, g: 0.7490196, b: 0.69411767, a: 1}
+  - {r: 0.5529412, g: 0.2901961, b: 0.2627451, a: 1}
+  - {r: 0.70980394, g: 0.32156864, b: 0.22352941, a: 1}
+  heroName: 
+  realName: 
+  age: 0
+  hometown: 
+  backstory: 
 --- !u!1 &3584415559462837375
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,7 +681,7 @@ Transform:
   - {fileID: 3623910800584216344}
   - {fileID: 1624469682965942961}
   - {fileID: 9134895657883734456}
-  m_Father: {fileID: 8051879838441532589}
+  m_Father: {fileID: 3908093492836447805}
   m_LocalEulerAnglesHint: {x: 0.138, y: -0.204, z: 0.283}
 --- !u!1 &3702998280320239092
 GameObject:
@@ -633,7 +694,7 @@ GameObject:
   - component: {fileID: 364383109880353335}
   - component: {fileID: 3194672875350840086}
   m_Layer: 0
-  m_Name: BootSprite
+  m_Name: BootSpriteL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -736,14 +797,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4244199571214706065}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.02, y: -0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3126763789074410171}
   - {fileID: 364383109880353335}
-  m_Father: {fileID: 8051879838441532589}
+  m_Father: {fileID: 3908093492836447805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4997087245479231432
 GameObject:
@@ -756,7 +817,7 @@ GameObject:
   - component: {fileID: 3126763789074410171}
   - component: {fileID: 2072468566257933697}
   m_Layer: 0
-  m_Name: LegSprite
+  m_Name: LegSpriteL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -846,7 +907,7 @@ GameObject:
   - component: {fileID: 1111041290965333804}
   - component: {fileID: 5640270150538256630}
   m_Layer: 0
-  m_Name: LegSprite
+  m_Name: LegSpriteR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -949,14 +1010,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5751797710098039808}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.02, y: -0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1111041290965333804}
   - {fileID: 2012902561565381432}
-  m_Father: {fileID: 8051879838441532589}
+  m_Father: {fileID: 3908093492836447805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6027154835531876408
 GameObject:
@@ -988,7 +1049,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8051879838441532589}
+  m_Father: {fileID: 3908093492836447805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3922296528331649812
 SpriteRenderer:
@@ -1158,7 +1219,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 537585421, guid: 1af7f5e0f5bcaa44b98256e17d95829e, type: 3}
   m_Color: {r: 1, g: 0.73909587, b: 0, a: 1}
   m_FlipX: 0
@@ -1170,6 +1231,84 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &6592755487218798072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3908093492836447805}
+  - component: {fileID: 8187216331177509025}
+  m_Layer: 0
+  m_Name: Sprites
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3908093492836447805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6592755487218798072}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3607124277779631628}
+  - {fileID: 1367591841431411278}
+  - {fileID: 468144169904849152}
+  - {fileID: 5352175674834291920}
+  - {fileID: 678937045474671252}
+  - {fileID: 1988522648300729310}
+  - {fileID: 6896577370844869941}
+  m_Father: {fileID: 8051879838441532589}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8187216331177509025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6592755487218798072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e1e7fb83496e6479ae33a0962a6d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  spriteLibrary: {fileID: 7108339969198208228, guid: e6edf6a41e635d1439485698a656dc13, type: 3}
+  headSprite: {fileID: 3970611217426466834}
+  hairSprite: {fileID: 594743088452336702}
+  hairResolver: {fileID: 9084581285462292895}
+  hairSprites: []
+  headwearSprite: {fileID: 597166142899893110}
+  headwearResolver: {fileID: 6307931870869887624}
+  headwearSprites: []
+  eyeSprite: {fileID: 2249199870554087754}
+  bodySprite: {fileID: 5991048503979433166}
+  pantsSprite: {fileID: 289686212242429697}
+  insigniaSprite: {fileID: 8220062858348500937}
+  insigniaResolver: {fileID: 7391655733121940566}
+  insigniaSprites: []
+  rightArm: {fileID: 6995829810265862515}
+  rightArmSprite: {fileID: 8753562375553740715}
+  rightHandSprite: {fileID: 4896915408768454465}
+  leftArm: {fileID: 824294438341489411}
+  leftArmSprite: {fileID: 4804902712136378534}
+  leftHandSprite: {fileID: 8321639788687560858}
+  rightLeg: {fileID: 5751797710098039808}
+  rightLegSprite: {fileID: 5640270150538256630}
+  rightBoot: {fileID: 7515593022170806027}
+  leftLeg: {fileID: 4244199571214706065}
+  leftLegSprite: {fileID: 2072468566257933697}
+  leftBoot: {fileID: 3194672875350840086}
+  cape: {fileID: 3922296528331649812}
 --- !u!1 &6817607514733429889
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,9 +1370,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteResolver
   m_CategoryHash: 0.024146153
-  m_labelHash: 5.692118e-28
+  m_labelHash: 0.011353224
   m_SpriteKey: 0
-  m_SpriteHash: 301456404
+  m_SpriteHash: 1073331512
 --- !u!212 &594743088452336702
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1281,8 +1420,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -14899590, guid: 6d63f5c6be4d76049bfed6ef0e3593d7, type: 3}
-  m_Color: {r: 0.17610055, g: 0.17610055, b: 0.17610055, a: 1}
+  m_Sprite: {fileID: 43724904, guid: 6d63f5c6be4d76049bfed6ef0e3593d7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1316,14 +1455,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6995829810265862515}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.02, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1052934177484808502}
   - {fileID: 8524119724753522171}
-  m_Father: {fileID: 8051879838441532589}
+  m_Father: {fileID: 3908093492836447805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7315437089032689027
 GameObject:
@@ -1403,7 +1542,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8133b57e8d57c144c8823252779c81fc, type: 3}
   m_Color: {r: 0.20440245, g: 0.61071736, b: 1, a: 1}
   m_FlipX: 0
@@ -1426,7 +1565,7 @@ GameObject:
   - component: {fileID: 8524119724753522171}
   - component: {fileID: 4896915408768454465}
   m_Layer: 0
-  m_Name: HandSprite
+  m_Name: HandSpriteR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1517,7 +1656,7 @@ GameObject:
   - component: {fileID: 4804902712136378534}
   - component: {fileID: 3917514966232829161}
   m_Layer: 0
-  m_Name: ArmSprite
+  m_Name: ArmSpriteL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1630,7 +1769,7 @@ GameObject:
   - component: {fileID: 2012902561565381432}
   - component: {fileID: 7515593022170806027}
   m_Layer: 0
-  m_Name: BootSprite
+  m_Name: BootSpriteR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
