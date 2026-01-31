@@ -57,7 +57,7 @@ public class Character : MonoBehaviour
     private int insigniaIndex = 0;  
 
     [Header("Details")]
-    public string heroName;
+    public string heroName = "default";
     public string realName;
     public int age;
     public string hometown;
@@ -66,6 +66,8 @@ public class Character : MonoBehaviour
 
     [Header("Stats")]
     public int deployments = 0;
+
+    public CharacterPanel panel;
 
     public void Awake()
     {
@@ -82,9 +84,6 @@ public class Character : MonoBehaviour
 
     public void Start()
     {
-        
-
-
         if (Random.value < alienChance)
         {
             isAlien = true;
@@ -108,6 +107,8 @@ public class Character : MonoBehaviour
         GenerateColours();
         GenerateHeroName();
         SetSprite();
+
+        panel.AssignCharacter(this);
     }
 
     public virtual void GenerateHeroName()

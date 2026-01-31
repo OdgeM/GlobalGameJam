@@ -14,6 +14,7 @@ public class CharacterPanel : MonoBehaviour
     public void AssignCharacter(Character _character)
     {
         character = _character;
+        Debug.Log(character.heroName);
         characterName.text = character.heroName;
     }
 }

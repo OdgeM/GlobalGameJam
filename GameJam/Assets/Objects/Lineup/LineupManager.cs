@@ -5,7 +5,6 @@ using UnityEngine;
 public class LineupManager : MonoBehaviour
 {
     public List<Hero> heroLineup;
-    public Dictionary<Hero, CharacterPanel> heroPanels;
     public int startingHeroSize = 3;
     public GameObject heroPrefab;
 
@@ -15,21 +14,21 @@ public class LineupManager : MonoBehaviour
     public GameObject villainPrefab;
 
     public GameObject characterPanelPrefab;
+    public CharacterMenu heroMenu;
     public GameObject heroPanelContent;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //InitialiseLineup();
-        createCharacter();
+        InitialiseLineup();
     }
 
     public void InitialiseLineup()
     {
         for (int i = 0; i < startingHeroSize; i++)
         {
-            Hero newHero = Instantiate(heroPrefab).GetComponent<Hero>();
-            heroLineup.Add(newHero);
+            createCharacter();
         }
     }
 
@@ -39,7 +38,11 @@ public class LineupManager : MonoBehaviour
         CharacterPanel newPanel = Instantiate(characterPanelPrefab, heroPanelContent.transform).GetComponent<CharacterPanel>();
 
         Hero newHero = Instantiate(heroPrefab, newPanel.locationNode.transform).GetComponent<Hero>();   
-        newPanel.AssignCharacter(newHero);
+        newHero.panel = newPanel;
+
+        heroLineup.Add(newHero);
+
+        heroMenu.PlacePanel(newPanel);
     }
 
     public Villain SelectVillain()

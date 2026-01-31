@@ -24,10 +24,7 @@ public class Map : MonoBehaviour
         
     }
 
-    void Start()
-    {
-        //GenerateIncident();
-    }
+
 
     public City GetRandomCity()
     {
