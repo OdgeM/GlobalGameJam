@@ -559,9 +559,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8051879838441532589}
-  - component: {fileID: 4531780047078012631}
+  - component: {fileID: 3635216811161084327}
   m_Layer: 0
-  m_Name: Hero
+  m_Name: Villain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -577,13 +577,13 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 399.99997, y: 399.99997, z: 399.99997}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 400, y: 400, z: 40}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3908093492836447805}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4531780047078012631
+--- !u!114 &3635216811161084327
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -592,12 +592,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2706323357760436296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a090839321a29d4e98035924707a37a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e19a19933283c741b7f19711ec7b5fc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Hero
+  m_EditorClassIdentifier: Assembly-CSharp::Villain
   useSeed: 0
-  characterSeed: 65465165
-  alienChance: 0.1
+  characterSeed: 1234567
+  alienChance: 0.2
   isAlien: 0
   sprite: {fileID: 8187216331177509025}
   pantsChance: 0.5
@@ -605,23 +605,31 @@ MonoBehaviour:
   insigniaChance: 0.5
   headwearChance: 0.5
   armAccentChance: 0.25
-  baldChance: 0.1
+  baldChance: 0.25
   humanSkinColours:
-  - {r: 1, g: 0.8745098, b: 0.76862746, a: 1}
-  - {r: 0.91764706, g: 0.79607844, b: 0.65882355, a: 1}
-  - {r: 0.96862745, g: 0.8862745, b: 0.67058825, a: 1}
-  - {r: 0.8627451, g: 0.7254902, b: 0.5686275, a: 1}
-  - {r: 0.9411765, g: 0.7529412, b: 0.5411765, a: 1}
-  - {r: 0.90588236, g: 0.7372549, b: 0.5686275, a: 1}
-  - {r: 0.9254902, g: 0.7490196, b: 0.5137255, a: 1}
-  - {r: 0.8117647, g: 0.61960787, b: 0.4862745, a: 1}
-  - {r: 0.6745098, g: 0.54509807, b: 0.39215687, a: 1}
-  - {r: 0.5803922, g: 0.38039216, b: 0.23529412, a: 1}
-  - {r: 0.69803923, g: 0.41568628, b: 0.28627452, a: 1}
-  - {r: 0.68235296, g: 0.4392157, b: 0.22745098, a: 1}
-  - {r: 0.6, g: 0.39215687, b: 0.3019608, a: 1}
-  - {r: 0.38431373, g: 0.22745098, b: 0.09411765, a: 1}
-  - {r: 0.24705882, g: 0.15686275, b: 0.09411765, a: 1}
+  - {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
+  - {r: 0.17254902, g: 0.13333334, b: 0.16862746, a: 1}
+  - {r: 0.23137255, g: 0.1882353, b: 0.14117648, a: 1}
+  - {r: 0.30588236, g: 0.2627451, b: 0.24705882, a: 1}
+  - {r: 0.3137255, g: 0.26666668, b: 0.26666668, a: 1}
+  - {r: 0.41568628, g: 0.30588236, b: 0.25882354, a: 1}
+  - {r: 0.3372549, g: 0.28235295, b: 0.23137255, a: 1}
+  - {r: 0.654902, g: 0.52156866, b: 0.41568628, a: 1}
+  - {r: 0.72156864, g: 0.5921569, b: 0.47058824, a: 1}
+  - {r: 0.8627451, g: 0.8156863, b: 0.7294118, a: 1}
+  - {r: 0.89411765, g: 0.7372549, b: 0.6, a: 1}
+  - {r: 0.5921569, g: 0.4745098, b: 0.38039216, a: 1}
+  - {r: 0.9019608, g: 0.80784315, b: 0.65882355, a: 1}
+  - {r: 0.8980392, g: 0.78431374, b: 0.65882355, a: 1}
+  - {r: 0.64705884, g: 0.41960785, b: 0.27450982, a: 1}
+  - {r: 0.5686275, g: 0.33333334, b: 0.23921569, a: 1}
+  - {r: 0.3254902, g: 0.23921569, b: 0.20784314, a: 1}
+  - {r: 0.44313726, g: 0.3882353, b: 0.3647059, a: 1}
+  - {r: 0.8392157, g: 0.76862746, b: 0.7607843, a: 1}
+  - {r: 1, g: 0.9607843, b: 0.88235295, a: 1}
+  - {r: 0.7921569, g: 0.7490196, b: 0.69411767, a: 1}
+  - {r: 0.5529412, g: 0.2901961, b: 0.2627451, a: 1}
+  - {r: 0.70980394, g: 0.32156864, b: 0.22352941, a: 1}
   hairColours:
   - {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
   - {r: 0.17254902, g: 0.13333334, b: 0.16862746, a: 1}
@@ -646,7 +654,7 @@ MonoBehaviour:
   - {r: 0.7921569, g: 0.7490196, b: 0.69411767, a: 1}
   - {r: 0.5529412, g: 0.2901961, b: 0.2627451, a: 1}
   - {r: 0.70980394, g: 0.32156864, b: 0.22352941, a: 1}
-  eyeColour: {r: 1, g: 1, b: 1, a: 1}
+  eyeColour: {r: 0.66666657, g: 0.064989395, b: 0.064989395, a: 1}
   heroName: 
   realName: 
   age: 0
@@ -1342,7 +1350,7 @@ Transform:
   m_GameObject: {fileID: 6817607514733429889}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.001, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
