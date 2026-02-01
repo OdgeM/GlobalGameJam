@@ -275,6 +275,14 @@ public class Character : MonoBehaviour
 
 
     }
+    public void Heal(int amount)
+    {
+        HP += amount;
+        HP = Mathf.Clamp(HP, 0, maxHP);
+
+
+        panel.TakeDamage();
+    }
 
     public void SetAvailable(bool availabililty)
     {

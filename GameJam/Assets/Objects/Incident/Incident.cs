@@ -17,6 +17,8 @@ public class Incident
     public float length = 3;
     public Hero hero;
 
+    public float trustValue;
+
     public float incidentStakes = 1;
     public string state = "Ongoing";
 
@@ -34,6 +36,7 @@ public class Incident
         location = city;
         locationName = city.cityName.Trim();
 
+        trustValue = ((villain.attack + villain.defence) / 2) + Random.value ;
 
         if (villain.isAlien)
         {
@@ -73,6 +76,8 @@ public class Incident
 
     public bool ResolveIncident(float date)
     {
+        
+
         dateCompleted = date;
         hero.deployments++;
         villain.deployments++;

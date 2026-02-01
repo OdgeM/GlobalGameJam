@@ -50,7 +50,7 @@ public class LineupManager : MonoBehaviour
     }
 
 
-    private Hero CreateHero()
+    public Hero CreateHero()
     {
         CharacterPanel newPanel = Instantiate(characterPanelPrefab, heroPanelContent.transform).GetComponent<CharacterPanel>();
 
@@ -64,6 +64,7 @@ public class LineupManager : MonoBehaviour
         newPanel.AssignCharacter(newHero);  
 
         newPanel.button.onClick.AddListener(delegate { gameManager.HeroSelected(newHero); });
+        
 
         return newHero;
     }
@@ -80,8 +81,25 @@ public class LineupManager : MonoBehaviour
         villainMenu.PlacePanel(newPanel);
 
         newPanel.AssignCharacter(newVillain);
+        newPanel.button.onClick.AddListener(delegate { gameManager.VillainSelected(newVillain); });
 
         return newVillain;
+    }
+
+    public void HealCharacters()
+    {
+        List<Hero> aliveHeroes = heroLineup.Where(h => !h.isAvailable).ToList();
+        List<Villain> aliveVillain = villainLineup.Where(h => !h.isAvailable).ToList();
+
+        foreach(Hero h in aliveHeroes)
+        {
+            h.Heal( Random.Range(0, 4));
+        }
+
+        foreach(Villain v in aliveVillain)
+        {
+            v.Heal(Random.Range(0, 4));
+        }
     }
 
     public Villain SelectVillain()

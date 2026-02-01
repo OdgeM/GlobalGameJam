@@ -213,6 +213,7 @@ public class IncidentScreen : MonoBehaviour
             AssignCharacter(incident.hero);
             AssignCharacter(incident.villain, false);
         }
+        else
         {
             AssignCharacter(incident.villain, false);
             UnassignHero();

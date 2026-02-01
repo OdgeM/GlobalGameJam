@@ -22,7 +22,6 @@ public class IncidentPanel : MonoBehaviour
     public Color warningColour = Color.orange;
     public Color winColour = Color.green;
     public Color lossColour = Color.red;
-        
     public void AssignIncident(Incident _incident, HeroSprite _sprite)
     {
         incident = _incident;

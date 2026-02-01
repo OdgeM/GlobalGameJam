@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public LineupManager lineupManager;
     public Map map;
 
+    public ResourceManager resourceManager;
 
     public float daysPerIncident = 1; // Average
     public int maxIncidentsPerDay = 3;
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
     public Toggle heroButton;
 
     public IncidentScreen incidentScreen;
+    public CharacterScreen characterScreen;
 
     public Button mapButton;
 
@@ -48,7 +50,6 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
     }
 
     float timePassed;
@@ -63,6 +64,9 @@ public class GameManager : MonoBehaviour
            
             if (timer.timeElapsed < prevTime)
             {
+                resourceManager.addResources(1);
+                lineupManager.HealCharacters();
+
                 incidentsToday = 0;
                 timePassed = 1 - prevTime + timer.timeElapsed;
             }
@@ -80,6 +84,9 @@ public class GameManager : MonoBehaviour
                 if (incident.length < 0)
                 {
                     incident.Expire(timer.currentDate);
+
+                    resourceManager.TrustChange(incident.trustValue * -2);
+
                     IncidentPanel panel = currentIncidents.Where(inc => inc.incident == incident).FirstOrDefault();
                     panel.Expire();
                     if (incidentScreen.incident == incident)
@@ -152,19 +159,34 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
-            
-            
+
+
+        }
+        else
+        {
+            CharacterSelected(hero);
         }
     }
 
-    public void VillainSelected()
+    public void VillainSelected(Villain villain)
     {
+        CharacterSelected(villain, false);
+    }
 
+    public void CharacterSelected(Character character, bool hero = true)
+    {
+        map.GetComponent<RectTransform>().anchoredPosition = new Vector2(map.GetComponent<RectTransform>().anchoredPosition.x, screenStack);
+        incidentScreen.GetComponent<RectTransform>().anchoredPosition = new Vector2(incidentScreen.GetComponent<RectTransform>().anchoredPosition.x, screenStack);
+        characterScreen.GetComponent<RectTransform>().anchoredPosition = new Vector2(incidentScreen.GetComponent<RectTransform>().anchoredPosition.x, screenActive);
+        characterScreen.AssignCharacter(character, hero);
+        selectedScreen = "Character";
+        mapButton.interactable = true;
     }
 
     public void incidentSelected(Incident incident)
     {
         map.GetComponent<RectTransform>().anchoredPosition = new Vector2(map.GetComponent<RectTransform>().anchoredPosition.x, screenStack);
+        characterScreen.GetComponent<RectTransform>().anchoredPosition = new Vector2(characterScreen.GetComponent<RectTransform>().anchoredPosition.x, screenStack);
 
         incidentScreen.AssignIncident(incident);
         incidentScreen.GetComponent<RectTransform>().anchoredPosition = new Vector2(incidentScreen.GetComponent<RectTransform>().anchoredPosition.x, screenActive);
@@ -175,10 +197,20 @@ public class GameManager : MonoBehaviour
 
     public void ResolveIncident()
     {
+
+
         Incident incident = incidentScreen.incident;
         IncidentPanel panel = currentIncidents.Where(inc => inc.incident == incident).FirstOrDefault();
         
         bool won = incident.ResolveIncident(timer.currentDate);
+
+        float multiplier = -1;
+        if (won)
+        {
+            multiplier = 1;
+        }
+        resourceManager.TrustChange(multiplier * incident.trustValue);
+
         StartCoroutine(Fight(incident.hero, incident.villain));
         panel.Resolve(won);
         incidentScreen.IncidentOver();
@@ -199,10 +231,17 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void HireHero()
+    {
+        resourceManager.spendResources(500);
+        lineupManager.CreateHero();
+    }
+
     public void selectMapScreen()
     {
         selectedScreen = "Map";
         incidentScreen.GetComponent<RectTransform>().anchoredPosition = new Vector2(incidentScreen.GetComponent<RectTransform>().anchoredPosition.x, screenStack);
+        characterScreen.GetComponent<RectTransform>().anchoredPosition = new Vector2(characterScreen.GetComponent<RectTransform>().anchoredPosition.x, screenStack);
         map.GetComponent<RectTransform>().anchoredPosition = new Vector2(map.GetComponent<RectTransform>().anchoredPosition.x, screenActive);
 
         mapButton.interactable = false;
