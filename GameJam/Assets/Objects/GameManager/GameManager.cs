@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public Timer timer;
@@ -14,17 +15,35 @@ public class GameManager : MonoBehaviour
     public int maxIncidentsPerDay = 3;
     private int incidentsToday = 0;
     private float prevTime = 0;
+    private float dryDays = 0;
+    public float dryDayMultiplier;
 
-    private List<Incident> currentIncidents = new();
-    private List<Incident> resolvedIncidents = new();
+    private List<IncidentPanel> currentIncidents = new();
+    private List<IncidentPanel> resolvedIncidents = new();
 
     public IncidentMenu incidentMenu;
     public GameObject incidentPanelContent;
-    private Dictionary<Incident, IncidentPanel> activeIncidentPanels = new();
     public GameObject incidentPanelPrefab;
     public GameObject spritePrefab;
 
-    
+    public CharacterMenu heroMenu;
+    public CharacterMenu villainMenu;
+
+    public float sidePanelStack = 300;
+    public float sidePanelActive = 0;
+    public float screenStack = 334;
+    public float screenActive = -212.25f;
+
+    public ToggleGroup sidePanelButtons;
+    public Toggle incidentButton;
+    public Toggle villainButton;
+    public Toggle heroButton;
+
+    public IncidentScreen incidentScreen;
+
+    public Button mapButton;
+
+    private string selectedScreen = "Map";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,13 +51,16 @@ public class GameManager : MonoBehaviour
         
     }
 
+    float timePassed;
+
+
+
     // Update is called once per frame
     void Update()
     {
         if (!timer.pauseButton.isOn)
         {
-            float timePassed;
-
+           
             if (timer.timeElapsed < prevTime)
             {
                 incidentsToday = 0;
@@ -49,27 +71,44 @@ public class GameManager : MonoBehaviour
                 timePassed = timer.timeElapsed - prevTime;
             }
 
-            foreach(Incident incident in currentIncidents)
+            List<IncidentPanel> activeIncidents = currentIncidents.Where(p => !p.resolved).ToList();
+            foreach(IncidentPanel incidentPanel in activeIncidents)
             {
+                Incident incident = incidentPanel.incident;
                 incident.passTime(timePassed);
 
                 if (incident.length < 0)
                 {
-                    Debug.Log("OVER");
+                    incident.Expire(timer.currentDate);
+                    IncidentPanel panel = currentIncidents.Where(inc => inc.incident == incident).FirstOrDefault();
+                    panel.Expire();
+                    if (incidentScreen.incident == incident)
+                    {
+                        incidentScreen.IncidentOver(true);
+                    }
                 }
             }
 
             if (incidentsToday < maxIncidentsPerDay)
             {
                 float incidentChance = timePassed / daysPerIncident;
-
+                Debug.Log(incidentChance);
                 if (Random.value < incidentChance)
                 {
+                    incidentsToday++;
                     CreateIncident();
+                }
+                else
+                {
+                    dryDays += timePassed;
                 }
             }
 
             prevTime = timer.timeElapsed;
+        }
+        else
+        {
+            timePassed = 0;
         }
     }
 
@@ -83,23 +122,112 @@ public class GameManager : MonoBehaviour
         HeroSprite newSprite = Instantiate(spritePrefab, newPanel.locationNode.transform).GetComponent<HeroSprite>();
 
         incidentMenu.PlacePanel(newPanel);
-        newPanel.AssignIncident("Attack on " + incident.locationName);
+        newPanel.AssignIncident(incident, newSprite);
 
-        StartCoroutine(waitForVillain(newSprite, incidentVillain, newPanel));
-
-        currentIncidents.Add(incident);
+        newPanel.button.onClick.AddListener(delegate { incidentSelected(newPanel.incident); });
+        
+        currentIncidents.Add(newPanel);
     }
 
-    public IEnumerator waitForVillain(HeroSprite sprite, Villain villain,IncidentPanel panel)
+    public void SelectHero()
     {
-        while (!villain.ready)
+        heroButton.isOn = true;
+    }
+
+    public void HeroSelected(Hero hero)
+    {
+        if (selectedScreen == "Incident")
         {
+            if (incidentScreen.incident.state != "Over")
+            {
+                if (hero.isAvailable)
+                {
+                    incidentScreen.AssignHero(hero);
+                }
+                else
+                {
+                    if (incidentScreen.incident.hero == hero)
+                    {
+                        incidentScreen.UnassignHero();
+                    }
+                }
+            }
+            
+            
+        }
+    }
+
+    public void VillainSelected()
+    {
+
+    }
+
+    public void incidentSelected(Incident incident)
+    {
+        map.GetComponent<RectTransform>().anchoredPosition = new Vector2(map.GetComponent<RectTransform>().anchoredPosition.x, screenStack);
+
+        incidentScreen.AssignIncident(incident);
+        incidentScreen.GetComponent<RectTransform>().anchoredPosition = new Vector2(incidentScreen.GetComponent<RectTransform>().anchoredPosition.x, screenActive);
+
+        selectedScreen = "Incident";
+        mapButton.interactable = true;
+    }
+
+    public void ResolveIncident()
+    {
+        Incident incident = incidentScreen.incident;
+        IncidentPanel panel = currentIncidents.Where(inc => inc.incident == incident).FirstOrDefault();
+        
+        bool won = incident.ResolveIncident(timer.currentDate);
+        StartCoroutine(Fight(incident.hero, incident.villain));
+        panel.Resolve(won);
+        incidentScreen.IncidentOver();
+    }
+
+    public IEnumerator Fight(Hero hero, Villain villain)
+    {
+        float time = 0;
+
+        while (time < 1)
+        {
+            time += timePassed;
             yield return new WaitForEndOfFrame();
         }
-        Debug.Log("HERE");
-        villain.SetSprite(sprite);
-        panel.SetVillain(villain.heroName, sprite);
+
+        hero.SetAvailable(true);
+        villain.SetAvailable(true);
+
     }
+
+    public void selectMapScreen()
+    {
+        selectedScreen = "Map";
+        incidentScreen.GetComponent<RectTransform>().anchoredPosition = new Vector2(incidentScreen.GetComponent<RectTransform>().anchoredPosition.x, screenStack);
+        map.GetComponent<RectTransform>().anchoredPosition = new Vector2(map.GetComponent<RectTransform>().anchoredPosition.x, screenActive);
+
+        mapButton.interactable = false;
+    }
+
+    public void SidePanelButtonPressed()
+    {
+        heroMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(sidePanelStack, heroMenu.GetComponent<RectTransform>().anchoredPosition.y);
+        incidentMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(sidePanelStack, incidentMenu.GetComponent<RectTransform>().anchoredPosition.y);
+        villainMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(sidePanelStack, villainMenu.GetComponent<RectTransform>().anchoredPosition.y);
+
+        switch (sidePanelButtons.GetFirstActiveToggle().name)
+        {
+            case "Incidents":
+                incidentMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(sidePanelActive, incidentMenu.GetComponent<RectTransform>().anchoredPosition.y);
+                break;
+            case "Heroes":
+                heroMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(sidePanelActive, heroMenu.GetComponent<RectTransform>().anchoredPosition.y);
+                break;
+            case "Villains":
+                villainMenu.GetComponent<RectTransform>().anchoredPosition = new Vector2(sidePanelActive, villainMenu.GetComponent<RectTransform>().anchoredPosition.y);
+                break;
+        }
+    }
+
 }
 
 

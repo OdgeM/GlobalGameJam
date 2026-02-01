@@ -17,11 +17,11 @@ public class Timer : MonoBehaviour
     public float speed2 = 1.5f;
     public float speed3 = 0.75f;
     public float timeElapsed = 0;
-    public float gameTimeElapsed = 0;
+    public float gameTimeElapsed = 1;
 
     public float currentSpeed = 0f;
 
-    public int currentDate = 0;
+    public int currentDate = 1;
     //private string currentButton = "Pause";
 
     private void Start()
@@ -44,14 +44,9 @@ public class Timer : MonoBehaviour
                 currentSpeed = speed3;
                 break;
             case "Pause":
-                timeElapsed = 0;
                 break;
         }
 
-        if (timeElapsed > currentSpeed)
-        {
-            timeElapsed = 0;
-        }
 
     }
 
@@ -67,14 +62,30 @@ public class Timer : MonoBehaviour
                 if (timeElapsed >= 1)
                 {
                     currentDate++;
-                    dateLabel.text = "Day: " + currentDate.ToString();
-                    timeElapsed%=1;
+                    timeElapsed %= 1;
+                   
                 }
-                
+                float hour = timeElapsed * 24;
+                float minute = hour % 1 * 60;
+
+                dateLabel.text = "Day: " + Time2Date(gameTimeElapsed);
+
             }
 
             yield return new WaitForEndOfFrame();
         }
         
+    }
+
+    static public string Time2Date(float time)
+    {
+        float hoursFloat = time % 1;
+        float days = time - hoursFloat;
+        float hours = hoursFloat * 24;
+        float minutes = hours % 1 * 60;
+
+        int day = (int)Mathf.Floor(days);
+
+        return day.ToString() + ", " + hours.ToString("00") + ":" + minutes.ToString("00");
     }
 }

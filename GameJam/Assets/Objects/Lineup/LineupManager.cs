@@ -27,6 +27,8 @@ public class LineupManager : MonoBehaviour
     public GameObject heroStack;
     public GameObject villainStack;
 
+    public GameManager gameManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -58,6 +60,11 @@ public class LineupManager : MonoBehaviour
         heroLineup.Add(newHero);
 
         heroMenu.PlacePanel(newPanel);
+
+        newPanel.AssignCharacter(newHero);  
+
+        newPanel.button.onClick.AddListener(delegate { gameManager.HeroSelected(newHero); });
+
         return newHero;
     }
 
@@ -71,12 +78,15 @@ public class LineupManager : MonoBehaviour
         villainLineup.Add(newVillain);
 
         villainMenu.PlacePanel(newPanel);
+
+        newPanel.AssignCharacter(newVillain);
+
         return newVillain;
     }
 
     public Villain SelectVillain()
     {
-        List<Villain> availableVillains = villainLineup.Where(villain => !activeVillains.Contains(villain)).ToList();
+        List<Villain> availableVillains = villainLineup.Where(villain => villain.isAvailable).ToList();
 
         float newVillainChance;
 
@@ -98,7 +108,6 @@ public class LineupManager : MonoBehaviour
         {
             // Create new Villain
             Villain newVillain = CreateVillain();
-            newVillain.deployments++;
             activeVillains.Add(newVillain);
             return newVillain;
             
@@ -106,8 +115,6 @@ public class LineupManager : MonoBehaviour
         else
         {
             Villain chosenVillain = availableVillains[Random.Range(0, availableVillains.Count)];
-            chosenVillain.deployments++;
-
             if (totalIncidents < 3)
             {
                 totalIncidents++;

@@ -7,8 +7,7 @@ public class City : MonoBehaviour
 {
     public string cityName;
     public string countryName;
-    private RawImage image;
-
+    public RawImage image;
     public List<string> features;
 
     void Awake()
@@ -20,5 +19,10 @@ public class City : MonoBehaviour
     public void Activate()
     {
         image.enabled = true;
+    }
+
+    public void Deactivate()
+    {
+        image.enabled = false;
     }
 }

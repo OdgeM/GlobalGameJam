@@ -66,10 +66,18 @@ public class Character : MonoBehaviour
 
     [Header("Stats")]
     public int deployments = 0;
+    public int attack = 0;
+    public int defence = 0;
+    public int maxHP = 0;
+    public int HP;
 
     public CharacterPanel panel;
 
     public bool ready  = false;
+
+    public bool isAvailable = true;
+    public bool isDead = false;
+    public Character killer;
 
     public void Awake()
     {
@@ -110,10 +118,19 @@ public class Character : MonoBehaviour
         GenerateHeroName();
         SetSprite(sprite);
 
-        panel.AssignCharacter(this);
+        GenerateStats();
+
+        //panel.AssignCharacter(this);
         ready = true;
     }
 
+    public virtual void GenerateStats()
+    {
+        attack = Random.Range(1, 11);
+        defence = Random.Range(1, 11);
+        maxHP = Random.Range(10, 31);
+        HP = maxHP;
+    }
 
     public virtual void GenerateHeroName()
     {
@@ -240,6 +257,33 @@ public class Character : MonoBehaviour
         _sprite.SetInsignia(hasInsignia, insigniaIndex, insigniaColour);
         _sprite.SetPants(hasPants, pantsColour);
         _sprite.SetCape(hasCape, capeColour);
+    }
+
+    public void TakeDamage(float damage, Character attacker)
+    {
+        int damageInt = (int)Mathf.Floor(damage);
+        HP -= damageInt;
+        if (HP <= 0)
+        {
+            killer = attacker;
+            isDead = true;
+            isAvailable = false;
+            HP = 0;
+            panel.transform.SetAsLastSibling();
+        }
+        panel.TakeDamage();
+
+
+    }
+
+    public void SetAvailable(bool availabililty)
+    {
+        if (!isDead)
+        {
+            isAvailable = availabililty;
+            panel.UpdateBusy();
+        }
+        
     }
 
 }

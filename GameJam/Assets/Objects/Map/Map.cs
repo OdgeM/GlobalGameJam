@@ -32,7 +32,7 @@ public class Map : MonoBehaviour
     }
     public Incident GenerateIncident(Villain villain)
     {
-        List<City> availableCities = cities.Where(city => !activeCities.Contains(city)).ToList();
+        List<City> availableCities = cities.Where(city => !city.image.isActiveAndEnabled).ToList();
         int idx = Random.Range(0, availableCities.Count);
         City chosenCity = availableCities[idx];
 
@@ -40,5 +40,10 @@ public class Map : MonoBehaviour
         activeCities.Add(chosenCity);
         Incident newIncident = new Incident(chosenCity, villain); 
         return newIncident;
+    }
+
+    public void ResolveIncident(Incident incident)
+    {
+        incident.location.Deactivate();
     }
 }
