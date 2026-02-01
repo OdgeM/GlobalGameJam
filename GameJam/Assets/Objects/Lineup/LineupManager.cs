@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LineupManager : MonoBehaviour
@@ -9,13 +10,22 @@ public class LineupManager : MonoBehaviour
     public GameObject heroPrefab;
 
     public List<Villain> villainLineup;
+    private List<Villain> activeVillains = new();
     public int startingVillainSize = 2;
     public int idealVillains = 5;
+    public int totalIncidents = 0;
     public GameObject villainPrefab;
 
     public GameObject characterPanelPrefab;
     public CharacterMenu heroMenu;
     public GameObject heroPanelContent;
+
+    public CharacterMenu villainMenu;
+    public GameObject villainPanelContent;
+
+
+    public GameObject heroStack;
+    public GameObject villainStack;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,12 +38,17 @@ public class LineupManager : MonoBehaviour
     {
         for (int i = 0; i < startingHeroSize; i++)
         {
-            createCharacter();
+            CreateHero();
+        }
+
+        for (int i = 0; i<startingVillainSize; i++)
+        {
+            CreateVillain();
         }
     }
 
 
-    private void createCharacter()
+    private Hero CreateHero()
     {
         CharacterPanel newPanel = Instantiate(characterPanelPrefab, heroPanelContent.transform).GetComponent<CharacterPanel>();
 
@@ -43,37 +58,72 @@ public class LineupManager : MonoBehaviour
         heroLineup.Add(newHero);
 
         heroMenu.PlacePanel(newPanel);
+        return newHero;
+    }
+
+    private Villain CreateVillain()
+    {
+        CharacterPanel newPanel = Instantiate(characterPanelPrefab, villainPanelContent.transform).GetComponent<CharacterPanel>();
+
+        Villain newVillain = Instantiate(villainPrefab, newPanel.locationNode.transform).GetComponent<Villain>();
+        newVillain.panel = newPanel;
+
+        villainLineup.Add(newVillain);
+
+        villainMenu.PlacePanel(newPanel);
+        return newVillain;
     }
 
     public Villain SelectVillain()
     {
-        int villainCount;
+        List<Villain> availableVillains = villainLineup.Where(villain => !activeVillains.Contains(villain)).ToList();
+
+        float newVillainChance;
+
         if (villainLineup.Count < idealVillains)
         {
-            villainCount = idealVillains;
+            newVillainChance = (idealVillains - villainLineup.Count)/idealVillains;
         }
         else 
         {
-            villainCount = villainLineup.Count + 1;
+           newVillainChance =  1 / villainLineup.Count;
         }
 
-        int index = Random.Range(0, villainCount);
-
-        if (index == villainLineup.Count)
+        if (totalIncidents < 3)
         {
-            Villain newVillain = Instantiate(villainPrefab).GetComponent<Villain>();
-            villainLineup.Add(newVillain);
-            newVillain.deployments++;
-            return newVillain;
+            newVillainChance = 0;
+        }
+
+        if (Random.value <= newVillainChance || availableVillains.Count ==  0)
+        {
             // Create new Villain
+            Villain newVillain = CreateVillain();
+            newVillain.deployments++;
+            activeVillains.Add(newVillain);
+            return newVillain;
+            
         }
         else
         {
-            villainLineup[index].deployments++;
-            return villainLineup[index];    
+            Villain chosenVillain = availableVillains[Random.Range(0, availableVillains.Count)];
+            chosenVillain.deployments++;
+
+            if (totalIncidents < 3)
+            {
+                totalIncidents++;
+            }
+            activeVillains.Add(chosenVillain);
+            return chosenVillain;    
         }
 
     }
+
+
+    public void DeactivateVillain(Villain villain)
+    {
+        activeVillains.Remove(villain); 
+    }
+
 
     // Update is called once per frame
     void Update()

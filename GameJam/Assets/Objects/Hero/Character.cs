@@ -54,10 +54,10 @@ public class Character : MonoBehaviour
 
     private bool hasInsignia = false;
     private Color insigniaColour;
-    private int insigniaIndex = 0;  
+    private int insigniaIndex = 0;
 
     [Header("Details")]
-    public string heroName = "default";
+    public string heroName;
     public string realName;
     public int age;
     public string hometown;
@@ -68,6 +68,8 @@ public class Character : MonoBehaviour
     public int deployments = 0;
 
     public CharacterPanel panel;
+
+    public bool ready  = false;
 
     public void Awake()
     {
@@ -106,10 +108,12 @@ public class Character : MonoBehaviour
 
         GenerateColours();
         GenerateHeroName();
-        SetSprite();
+        SetSprite(sprite);
 
         panel.AssignCharacter(this);
+        ready = true;
     }
+
 
     public virtual void GenerateHeroName()
     {
@@ -226,16 +230,16 @@ public class Character : MonoBehaviour
         return new Vector3(h, s, v);
     }
 
-    private void SetSprite()
+    public void SetSprite(HeroSprite _sprite)
     {
-        sprite.SetSkinColour(skinColour);
-        sprite.SetEyeColour(eyeColour);
-        sprite.SetSuitColour(bodyColour, armColour, legColour, bootColour);
-        sprite.SetHair(hasHair, hairIndex, hairColour);
-        sprite.SetHeadwear(hasHeadwear, headwearIndex, headwearColour);
-        sprite.SetInsignia(hasInsignia, insigniaIndex, insigniaColour);
-        sprite.SetPants(hasPants, pantsColour);
-        sprite.SetCape(hasCape, capeColour);
+        _sprite.SetSkinColour(skinColour);
+        _sprite.SetEyeColour(eyeColour);
+        _sprite.SetSuitColour(bodyColour, armColour, legColour, bootColour);
+        _sprite.SetHair(hasHair, hairIndex, hairColour);
+        _sprite.SetHeadwear(hasHeadwear, headwearIndex, headwearColour);
+        _sprite.SetInsignia(hasInsignia, insigniaIndex, insigniaColour);
+        _sprite.SetPants(hasPants, pantsColour);
+        _sprite.SetCape(hasCape, capeColour);
     }
 
 }

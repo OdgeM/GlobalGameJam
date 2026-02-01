@@ -9,8 +9,6 @@ public class Map : MonoBehaviour
     public GameObject cityContainer;
     public static List<City> cities;
     private List<City> activeCities = new();
-    private List<Incident> currentIncidents = new();
-    private List<Incident> resolvedIncidents = new();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -32,7 +30,7 @@ public class Map : MonoBehaviour
         City chosenCity = cities[idx];
         return chosenCity;
     }
-    public void GenerateIncident()
+    public Incident GenerateIncident(Villain villain)
     {
         List<City> availableCities = cities.Where(city => !activeCities.Contains(city)).ToList();
         int idx = Random.Range(0, availableCities.Count);
@@ -40,8 +38,7 @@ public class Map : MonoBehaviour
 
         chosenCity.Activate();
         activeCities.Add(chosenCity);
-        Incident newIncident = new Incident(chosenCity); 
-        currentIncidents.Add(newIncident); 
-
+        Incident newIncident = new Incident(chosenCity, villain); 
+        return newIncident;
     }
 }
